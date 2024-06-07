@@ -1,0 +1,6 @@
+# Step 1 - Data Processing
+input_file: 'data/inputs/TableS1.csv'
+output_file: 'data/outputs/metamorphics.csv'
+
+pdb_server: "https://files.wwpdb.org/"
+pdb_dir: 'data/pdb'
