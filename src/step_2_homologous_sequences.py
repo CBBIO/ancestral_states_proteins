@@ -12,7 +12,6 @@ def load_aligned_fasta(filepath):
 
     return digital_msa
 
-
 def build_hmm_from_msa(msa):
     builder = plan7.Builder(alphabet=easel.Alphabet.amino())
     background = plan7.Background(easel.Alphabet.amino())
@@ -44,6 +43,21 @@ def main():
     background = pyhmmer.plan7.Background(alphabet)
 
     pipeline = pyhmmer.plan7.Pipeline(alphabet, background=background)
+
+    seq_file_path = '/home/guest/PycharmProjects/ancestral_states_proteins/data/inputs/uniref50.fasta'
+
+    if not os.path.exists(seq_file_path):
+        raise FileNotFoundError(f"No se encontró el archivo: {seq_file_path}")
+
+    with pyhmmer.easel.SequenceFile(seq_file_path, digital=True, alphabet=alphabet) as seq_file:
+        hits = pipeline.search_hmm(hmm, seq_file)
+
+        print(f"Número de hits encontrados: {len(hits)}")
+
+        # Imprimir detalles sobre los hits
+        for hit in hits:
+            print(dir(hit))
+            print(f"name: {hit.name}, Score: {hit.score:.2f}, E-value: {hit.evalue:.2e}")
 
     # Crear una lista para almacenar las secuencias de los hits
     all_hits_sequences = []
