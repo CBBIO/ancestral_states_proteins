@@ -1,6 +1,18 @@
 # Step 1 - Data Processing
-input_file: 'data/inputs/TableS1.csv'
-output_file: 'data/outputs/metamorphics.csv'
+input_file#1: 'data/inputs/TableS1.csv'
+output_file#1: 'data/outputs/metamorphics.csv'
 
 pdb_server: "https://files.wwpdb.org/"
 pdb_dir: 'data/pdb'
+
+# Step 2 - Homologous Sequences
+input_file#2: 'data/outputs/metamorphics.csv'
+reference_db: 'data/inputs/uniref50.fasta'
+homologous_dir: 'data/outputs/homologous'
+profiles_dir: 'data/outputs/profiles'
+
+# Step 3 - MSA of Homologous Sequences
+input_file#3: 'data/outputs/homologous'
+msa_results_dir: 'data/outputs/msa_results'
+
+# Step 4 - IQ-Tree generation
